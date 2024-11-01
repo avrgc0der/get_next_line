@@ -6,7 +6,7 @@
 /*   By: enoshahi <enoshahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:46:15 by enoshahi          #+#    #+#             */
-/*   Updated: 2024/10/28 13:16:51 by enoshahi         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:00:06 by enoshahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*get_next_line(int fd)
 {
 	// static variables always start at an initial value, by default start at NULL.
-	char		*tmp;
 	static char	*buffer = NULL;
 	char		*ret;
 	int			cap;
@@ -68,13 +67,30 @@ int main(void)
 // ? ||===========================|| 
 // ! ||       BUFFER_SIZE=9       ||
 // * ||  .txt = "Hello\nWorld\n"  ||
-// * ||  *tmp = "Hello\nWor"      ||
-// * ||  *buf = "Wor"             ||
-// * ||  *ret = "Hello\n"         ||
+// * ||  *buf = "Wor"	  ||
+// * ||  *ret = "HelloWor"         ||
+// * ||  remain: ""               ||
 //   || before \n: RETURN         ||
 //   || after \n: STATIC BUFFER   ||
 //   || read data: TEMP           ||
 // ? ||===========================||
+
+int i;
+int j;
+i = 0;
+i = 5;
+j = 0;
+while (str[i] != '\0')
+{
+	str[j] = str[i];
+	i++;
+	j++;
+	str[j] = '\0';
+}
+Hello\n
+
+char a[]
+
 
 // when gnl runs, it will:
 // 1. read from the .txt up until the BUF_SIZE       |
@@ -85,3 +101,5 @@ int main(void)
 // store it in *ret, return that
 
 // 3. read *tmp up until the \n and then dup it to ret.
+
+// ! Hello World\n*

@@ -6,7 +6,7 @@
 /*   By: enoshahi <enoshahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:58 by enoshahi          #+#    #+#             */
-/*   Updated: 2024/10/29 13:44:32 by enoshahi         ###   ########.fr       */
+/*   Updated: 2024/11/01 14:47:54 by enoshahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,25 @@ char	*ft_strjoin(char *s1, char *s2)
 	tmp = malloc(sizeof(char) * ((ft_strlen(s1) + ft_strlen(s2)) + 1));
 	if (!tmp)
 		return (NULL);
-	while (s1[i] != '\0')
+	while (s1 != NULL && s1[i] != '\0')
 	{
 		tmp[i] = s1[i];
 		i++;
 	}
-	while (s2[j] != '\0')
+	while (s2 != NULL && s2[j] != '\0' && s2[j] != '\n')
 	{
 		tmp[j + i] = s2[j];
 		j++;
 	}
+	if (s2 != NULL && s2[j] == '\n')
+		tmp[j++ + i] = '\n';
 	tmp[j + i] = '\0';
+	if (s1 != NULL)
+		free(s1);
 	return (tmp);
 }
 
-char	*ft_strdup(const char *str)
+char	*ft_strdup(const char *str, int cap)
 {
 	int		len;
 	char	*tmp;
@@ -54,10 +58,10 @@ char	*ft_strdup(const char *str)
 
 	len = 0;
 	i = 0;
-	while (str[len] != '\0')
+	while (str[len] != '\0' && len < cap)
 		len++;
-	tmp = ft_calloc(sizeof(char) * (len + 1));
-	while (str[i] != '\0')
+	tmp = malloc(sizeof(char) * (len + 1));
+	while (i < len)
 	{
 		tmp[i] = str[i];
 		i++;
@@ -72,7 +76,7 @@ size_t	ft_strlen(char *str)
 	size_t	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str != NULL && str[i] != '\0')
 		i++;
 	return (i);
 }
@@ -84,7 +88,7 @@ char	*ft_strchr(const char *s, int c)
 
 	i = 0;
 	curr = c;
-	while (s[i] != '\0')
+	while (s != NULL && s[i] != '\0')
 	{
 		if (s[i] == curr)
 		{
@@ -92,7 +96,7 @@ char	*ft_strchr(const char *s, int c)
 		}
 		i++;
 	}
-	if (s[i] == curr)
+	if (s != NULL && s[i] == curr)
 	{
 		return ((char *) &s[i]);
 	}
