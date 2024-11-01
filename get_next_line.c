@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: enoshahi <enoshahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: enoshahi < enoshahi@student.42abudhabi.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:46:15 by enoshahi          #+#    #+#             */
-/*   Updated: 2024/10/28 18:51:23 by enoshahi         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:47:15 by enoshahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char *read_new_line(char *tmp, char *ret, int fd)
-{
-	int i;
-
-	i = 0;
-	
-	while (tmp[i] != '\0')
-	{
-		if (tmp[i] == ))
-		{
-			ft_strdup
-		}
-		i++;
-	}
-}
 
 char	*get_next_line(int fd)
 {
@@ -36,22 +20,31 @@ char	*get_next_line(int fd)
 	int			cap;
 	int			len;
 
-	if (tmp == NULL)
-		tmp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	tmp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	cap = read(fd, tmp, BUFFER_SIZE);
 	if (cap < 0)
 	{
 		free (tmp);
-		tmp = NULL;
 		return (NULL);
 	}
 	if (cap == 0)
 	{
 		free (tmp);
-		tmp = NULL;
 		return (NULL);
 	}
 	tmp[cap] = '\0';
+	
+	// ! read up until \n
+	while (ft_strchr(tmp, '\n') == NULL)
+	{
+		
+	}
+	if (!ft_strchr(tmp, '\n'))
+	{
+		// ! we keep reading until we find a new line
+		
+	}
+	
 	return (ret);
 }
 
