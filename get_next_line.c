@@ -6,7 +6,7 @@
 /*   By: enoshahi <enoshahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:46:15 by enoshahi          #+#    #+#             */
-/*   Updated: 2024/11/01 15:10:37 by enoshahi         ###   ########.fr       */
+/*   Updated: 2024/11/02 16:16:08 by enoshahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,23 +81,4 @@ int main(void)
 	str = get_next_line(fd);
 	printf("%s", str);
 	free(str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	free(str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	free(str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	free(str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	free(str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	free(str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	free(str);
-	close(fd);
 }
