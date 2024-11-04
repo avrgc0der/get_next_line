@@ -6,7 +6,7 @@
 /*   By: enoshahi <enoshahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:58 by enoshahi          #+#    #+#             */
-/*   Updated: 2024/11/01 14:47:54 by enoshahi         ###   ########.fr       */
+/*   Updated: 2024/11/04 13:30:38 by enoshahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 USED FUNCTS:
 - strjoin
 - strdup
-- calloc
 - strlen
 - strchr
 */
@@ -49,27 +48,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		free(s1);
 	return (tmp);
 }
-
-char	*ft_strdup(const char *str, int cap)
-{
-	int		len;
-	char	*tmp;
-	int		i;
-
-	len = 0;
-	i = 0;
-	while (str[len] != '\0' && len < cap)
-		len++;
-	tmp = malloc(sizeof(char) * (len + 1));
-	while (i < len)
-	{
-		tmp[i] = str[i];
-		i++;
-	}
-	tmp[i] = '\0';
-	return (tmp);
-}
-
 
 size_t	ft_strlen(char *str)
 {

@@ -6,11 +6,36 @@
 /*   By: enoshahi <enoshahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:46:15 by enoshahi          #+#    #+#             */
-/*   Updated: 2024/11/02 16:16:08 by enoshahi         ###   ########.fr       */
+/*   Updated: 2024/11/04 16:08:58 by enoshahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	get_the_difference(char *buffer, int cap)
+{
+	int j;
+
+	j = 0;
+		while (buffer[cap] != '\0')
+		{
+			if (buffer[cap] == '\n')
+			{
+				cap++;
+				while (buffer[cap] != '\0')
+				{
+					buffer[j] = buffer[cap];
+					cap++;
+					j++;
+				}
+				buffer[j] = '\0';
+				break;
+			}
+			cap++;
+		}
+		if (j == 0)
+			buffer[0] = '\0';
+}
 
 char	*get_next_line(int fd)
 {
@@ -50,35 +75,18 @@ char	*get_next_line(int fd)
 		cap = 0;
 		j = 0;
 		ret = ft_strjoin(ret, buffer);
-		while (buffer[cap] != '\0')
-		{
-			if (buffer[cap] == '\n')
-			{
-				cap++;
-				while (buffer[cap] != '\0')
-				{
-					buffer[j] = buffer[cap];
-					cap++;
-					j++;
-				}
-				buffer[j] = '\0';
-				break;
-			}
-			cap++;
-		}
-		if (j == 0)
-			buffer[0] = '\0';
+		get_the_difference(buffer, cap);
 	}	
 	return (ret);
 }
 
-int main(void)
-{
-	char *str;
-	int fd;
-	fd = open("text.txt", O_RDONLY);
-	// ! IN THE CASE OF RETURNING POINTERS ALWAYSSS MAKE SURE TO FREE !!!!!!!
-	str = get_next_line(fd);
-	printf("%s", str);
-	free(str);
-}
+// // int main(void)
+// // {
+// // 	char *str;
+// // 	int fd;
+// // 	fd = open("text.txt", O_RDONLY);
+// // 	// ! IN THE CASE OF RETURNING POINTERS ALWAYSSS MAKE SURE TO FREE !!!!!!!
+// // 	str = get_next_line(fd);
+// // 	printf("%s", str);
+// // 	free(str);
+// // }

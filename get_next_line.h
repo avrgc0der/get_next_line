@@ -6,7 +6,7 @@
 /*   By: enoshahi <enoshahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:46:04 by enoshahi          #+#    #+#             */
-/*   Updated: 2024/11/01 15:06:57 by enoshahi         ###   ########.fr       */
+/*   Updated: 2024/11/04 13:32:28 by enoshahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@
 typedef unsigned char	t_usc;
 
 char	*get_next_line(int fd);
+void	get_the_difference(char *buffer, int cap);
 char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strdup(const char *str, int cap);
-void	*ft_calloc(size_t count, size_t size);
 size_t	ft_strlen(char *str);
 char	*ft_strchr(const char *s, int c);
 
