@@ -1,100 +1,91 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enoshahi <enoshahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:46:15 by enoshahi          #+#    #+#             */
-/*   Updated: 2024/11/04 20:42:58 by enoshahi         ###   ########.fr       */
+/*   Updated: 2024/11/09 20:02:58 by enoshahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	get_the_difference(char *buffer, int cap)
 {
-	int j;
+	int	j;
 
 	j = 0;
-		while (buffer[cap] != '\0')
+	while (buffer[cap] != '\0')
+	{
+		if (buffer[cap] == '\n')
 		{
-			if (buffer[cap] == '\n')
-			{
-				cap++;
-				while (buffer[cap] != '\0')
-				{
-					buffer[j] = buffer[cap];
-					cap++;
-					j++;
-				}
-				buffer[j] = '\0';
-				break;
-			}
 			cap++;
+			while (buffer[cap] != '\0')
+			{
+				buffer[j] = buffer[cap];
+				cap++;
+				j++;
+			}
+			buffer[j] = '\0';
+			break ;
 		}
-		if (j == 0)
-			buffer[0] = '\0';
+		cap++;
+	}
+	if (j == 0)
+		buffer[0] = '\0';
 }
 
-char *free_buf(char **buffer, char *ret, int rettype)
+char	*free_buf(char **buffer, char *ret, int rettype)
 {
 	free (*buffer);
 	*buffer = NULL;
 	if (rettype == 0)
 	{
-		if (rettype != NULL)
+		if (rettype <= 0)
 			free (ret);
 		return (NULL);
 	}
 	return (ret);
 }
 
-char *check_flags(int buf_len, int fd, char *ret, char **buffer)
+void	initialize(char **ret, int *cap, char **buffer, int *j)
 {
-	if (buffer[0] == '\0')
-	{
-		buf_len = read(fd, buffer, BUFFER_SIZE);
-		if (buf_len < 0)
-			return (free_buf(&buffer, ret, 0));
-		if (buf_len == 0)
-			return (free_buf(&buffer, ret, 1));
-		buffer[buf_len] = '\0';
-	}
+	*cap = 0;
+	*j = 0;
+	*ret = ft_joinstr(*ret, *buffer);
+	if (!ret)
+		free(ret);
+	get_the_difference(*buffer, *cap);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer = NULL;
+	static char	*buffer[MAX_FD];
 	char		*ret;
 	int			buf_len;
 	int			cap;
 	int			j;
 
 	if (buffer == NULL)
-	{
-		buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		buffer[0] = '\0';
-	}
+		buffer = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
+	if (buffer == NULL)
+		return (NULL);
 	ret = NULL;
 	while (ft_strchr(ret, '\n') == NULL)
 	{
-		check_flags();
-		// if (buffer[0] == '\0')
-		// {
-		// 	buf_len = read(fd, buffer, BUFFER_SIZE);
-		// 	if (buf_len < 0)
-		// 		return (free_buf(&buffer, ret, 0));
-		// 	if (buf_len == 0)
-		// 		return (free_buf(&buffer, ret, 1));
-		// 	buffer[buf_len] = '\0';
-		// }
-		
-		cap = 0;
-		j = 0;
-		ret = ft_strjoin(ret, buffer);
-		get_the_difference(buffer, cap);
-	}	
+		if (buffer[0] == '\0')
+		{
+			buf_len = read(fd, buffer, BUFFER_SIZE);
+			if (buf_len < 0)
+				return (free_buf(&buffer, ret, 0));
+			if (buf_len == 0)
+				return (free_buf(&buffer, ret, 1));
+			buffer[buf_len] = '\0';
+		}
+		initialize(&ret, &cap, &buffer, &j);
+	}
 	return (ret);
 }
 

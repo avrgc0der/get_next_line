@@ -6,7 +6,7 @@
 /*   By: enoshahi <enoshahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:58 by enoshahi          #+#    #+#             */
-/*   Updated: 2024/11/04 13:30:38 by enoshahi         ###   ########.fr       */
+/*   Updated: 2024/11/09 17:22:00 by enoshahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ USED FUNCTS:
 - strchr
 */
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_joinstr(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -30,7 +30,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	j = 0;
 	tmp = malloc(sizeof(char) * ((ft_strlen(s1) + ft_strlen(s2)) + 1));
 	if (!tmp)
-		return (NULL);
+		return (free(s1), NULL);
 	while (s1 != NULL && s1[i] != '\0')
 	{
 		tmp[i] = s1[i];
@@ -80,4 +80,22 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return (NULL);
 }
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	t_usc	*tmp;
+	size_t	i;
+
+	i = 0;
+	tmp = malloc(count * size);
+	if (!tmp)
+		return (NULL);
+	while (i < count * size)
+	{
+		tmp[i] = 0;
+		i++;
+	}
+	return (tmp);
+}
+
 
