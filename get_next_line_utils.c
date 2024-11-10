@@ -6,7 +6,7 @@
 /*   By: enoshahi <enoshahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:58 by enoshahi          #+#    #+#             */
-/*   Updated: 2024/11/09 17:22:00 by enoshahi         ###   ########.fr       */
+/*   Updated: 2024/11/10 19:13:43 by enoshahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,3 @@ void	*ft_calloc(size_t count, size_t size)
 	}
 	return (tmp);
 }
-
-

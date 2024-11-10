@@ -6,7 +6,7 @@
 /*   By: enoshahi <enoshahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:46:04 by enoshahi          #+#    #+#             */
-/*   Updated: 2024/11/09 20:01:16 by enoshahi         ###   ########.fr       */
+/*   Updated: 2024/11/10 19:12:18 by enoshahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 # define GET_NEXT_LINE_BONUS_H
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
-#  define MAX_FD 1024 
-
 # endif
+# define MAX_FD 1024 
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>

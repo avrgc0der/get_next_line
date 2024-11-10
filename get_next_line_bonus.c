@@ -6,7 +6,7 @@
 /*   By: enoshahi <enoshahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:46:15 by enoshahi          #+#    #+#             */
-/*   Updated: 2024/11/09 20:02:58 by enoshahi         ###   ########.fr       */
+/*   Updated: 2024/11/10 19:40:13 by enoshahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,23 @@ char	*get_next_line(int fd)
 	int			cap;
 	int			j;
 
-	if (buffer == NULL)
-		buffer = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
-	if (buffer == NULL)
+	if ((fd >= MAX_FD || fd < 0) || BUFFER_SIZE <= 0)
+		return (NULL);
+	if (buffer[fd] == NULL)
+		buffer[fd] = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
+	if (buffer[fd] == NULL)
 		return (NULL);
 	ret = NULL;
 	while (ft_strchr(ret, '\n') == NULL)
 	{
-		if (buffer[0] == '\0')
+		if (buffer[fd][0] == '\0')
 		{
-			buf_len = read(fd, buffer, BUFFER_SIZE);
-			if (buf_len < 0)
-				return (free_buf(&buffer, ret, 0));
-			if (buf_len == 0)
-				return (free_buf(&buffer, ret, 1));
-			buffer[buf_len] = '\0';
+			buf_len = read(fd, buffer[fd], BUFFER_SIZE);
+			if (buf_len <= 0)
+				return (free_buf(&buffer[fd], ret, (buf_len == 0)));
+			buffer[fd][buf_len] = '\0';
 		}
-		initialize(&ret, &cap, &buffer, &j);
+		initialize(&ret, &cap, &buffer[fd], &j);
 	}
 	return (ret);
 }
